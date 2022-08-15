@@ -1,0 +1,23 @@
+{
+  "name": "ITHillel_dz16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mish-hash/ITHillel_dz16.git"
+  },
+  "author": "Mikhail Poluektov <poluektov23@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mish-hash/ITHillel_dz16/issues"
+  },
+  "homepage": "https://github.com/Mish-hash/ITHillel_dz16#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
