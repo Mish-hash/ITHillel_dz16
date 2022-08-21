@@ -1,3 +1,4 @@
+import '../css/style.css';
 
 /*
 Напишите небольшое приложение, которое будет работать с Rick&Morty API.
@@ -27,25 +28,14 @@ https://rickandmortyapi.com/documentation/#get-multiple-characters - вот ту
 const apiUrl = 'https://rickandmortyapi.com/api/character/';
 let charArr = [1,2,3,4,5,6,7,8,9,10];
 
-const request = fetch(apiUrl + charArr.toString());
-
-let characters;
-
-request.then(req => req.json())
-    .then(data => {
-        render(data);
-        characters = {...data}
-    })
-    .catch(err => {
-        console.log(err);
-});
+let characters = [];
 
 
 function render(obj) {
-    const divCharacters = document.getElementById('characters');
 
-    for(elem of obj) {
-        if(elem === undefined || elem ==='undefined[object Object]') continue;
+    const divCharacters = document.getElementById('characters');
+    obj.forEach(elem => {
+        if(elem === undefined || elem ==='undefined[object Object]') return;
         const divCard = document.createElement('div');
         divCard.classList.add('card');
 
@@ -84,8 +74,20 @@ function render(obj) {
         divCard.append(divCardInfo, divCardImage);
 
         divCharacters.appendChild(divCard);
-    };
+    });
+
 };
+
+const request = fetch(apiUrl + charArr.toString());
+
+request.then(req => req.json())
+    .then(data => {
+        render(data);
+        characters = [...data]
+    })
+    .catch(err => {
+        console.log(err);
+});
 
 
 // Фильтр из формы
@@ -101,9 +103,7 @@ form.addEventListener('change', ()=>{
     const alive = document.getElementById('alive').checked ? 'Alive' : null;
     const dead = document.getElementById('dead').checked ? 'Dead' : null;
 
-
-    for (i in characters) {
-
+    characters.forEach((elem, i) => {
         if (
             (characters[i].gender === male || characters[i].gender === female) &&
             (characters[i].status === alive || characters[i].status === dead)
@@ -123,9 +123,7 @@ form.addEventListener('change', ()=>{
         } else if (male === null && female === null && alive === null && dead === null) {
             newData[i] = characters[i];
         }
-
-
-    }
+    });
 
     const charactersOld = document.getElementById('characters');
     while(charactersOld.firstChild) {
