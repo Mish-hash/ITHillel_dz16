@@ -7,8 +7,8 @@ module.exports = {
         main: path.resolve(__dirname, './js/script.js')
     },
     output: {
-        path: path.resolve(__dirname, './dist/js'),
-        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].[contenthash].bundle.js',
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -17,4 +17,14 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
     ],
+    module: {
+        rules: [
+            //JavaScript
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+        ],
+    },
 };
